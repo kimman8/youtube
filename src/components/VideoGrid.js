@@ -1,6 +1,6 @@
 import React from 'react';
 import Spinner from './Spinner';
-import VideoItem from './VideoItem';
+import VideoCard from './VideoCard/VideoCard';
 
 const VideoGrid = ({ items, isLoading }) => {
   return isLoading ? (
@@ -8,7 +8,7 @@ const VideoGrid = ({ items, isLoading }) => {
   ) : (
     <section>
       {items.map((item) => (
-        <VideoItem key={item.id.channelId} item={item}></VideoItem>
+        <VideoCard key={item.id.channelId} item={item}></VideoCard>
       ))}
     </section>
   );

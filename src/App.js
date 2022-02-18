@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import './App.css';
 import VideoGrid from './components/VideoGrid';
-import Search from './components/Search';
 import axios from 'axios';
+import Header from './components/Header/Header';
+import Sidebar from './components/Sidebar/Sidebar';
+import RecommendedVideos from './components/RecommendedVideos/RecommendedVideos';
 
 const App = () => {
   const [items, setItems] = useState([]);
@@ -21,9 +24,13 @@ const App = () => {
     fetchItems();
   }, [query]);
   return (
-    <div>
-      <Search getQuery={(q) => setQuery(q)} />
-      <VideoGrid isLoading={isLoading} items={items} />
+    <div className='app'>
+      <Header getQuery={(q) => setQuery(q)} />
+      <div className='app__page'>
+        <Sidebar />
+        {/* <RecommendedVideos /> */}
+        <VideoGrid isLoading={isLoading} items={items} />
+      </div>
     </div>
   );
 };
