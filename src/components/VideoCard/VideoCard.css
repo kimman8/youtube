@@ -2,8 +2,52 @@
   width: 270px;
   margin-bottom: 40px;
 }
+.videoCard:hover .videoCard__like {
+  opacity: 1;
+  color: gray;
+  cursor: pointer;
+}
 
 .videoCard__thumbnail {
   height: 140px;
   width: 250px;
+}
+.videoCard__info {
+  display: flex;
+  margin-top: 0;
+  padding-right: 25px;
+}
+
+.videoCard__text {
+  margin-left: 15px;
+}
+.videoCard__text > h4 {
+  font-size: 14px;
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+.videoCard__text > p {
+  font-size: 12px;
+  color: gray;
+  line-height: 0.5;
+}
+
+.videoCard__avatar {
+  width: 30px !important;
+  height: 30px !important;
+}
+.videoCard__duration {
+  position: relative;
+  top: -40px;
+  left: 195px;
+  background-color: black;
+  color: white;
+  font-size: 12px;
+  border: none;
+  border-radius: 2px;
+}
+.videoCard__like {
+  width: 20px !important;
+  height: 20px !important;
+  opacity: 0;
 }

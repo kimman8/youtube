@@ -7,6 +7,7 @@ import HistoryIcon from '@mui/icons-material/History';
 import WatchLaterIcon from '@mui/icons-material/WatchLater';
 import ThumbUpAltOutlinedIcon from '@mui/icons-material/ThumbUpAltOutlined';
 import DownloadIcon from '@mui/icons-material/Download';
+import { Link } from 'react-router-dom';
 
 import SidebarRow from '../SidebarRow/SidebarRow';
 import './Sidebar.css';
@@ -14,7 +15,9 @@ import './Sidebar.css';
 function Sidebar() {
   return (
     <div className='sidebar'>
-      <SidebarRow selected Icon={HomeIcon} title='Home' />
+      <Link to='/'>
+        <SidebarRow selected Icon={HomeIcon} title='Home' />
+      </Link>
       <SidebarRow Icon={WhatshotIcon} title='Trending' />
       <SidebarRow Icon={SubscriptionsIcon} title='Subscription' />
       <hr />
@@ -22,7 +25,9 @@ function Sidebar() {
       <SidebarRow Icon={HistoryIcon} title='History' />
       <SidebarRow Icon={WatchLaterIcon} title='Watch Later' />
       <SidebarRow Icon={DownloadIcon} title='Downloads' />
-      <SidebarRow Icon={ThumbUpAltOutlinedIcon} title='Liked videos' />
+      <Link to='/likedvideos'>
+        <SidebarRow Icon={ThumbUpAltOutlinedIcon} title='Liked videos' />
+      </Link>
       <hr />
     </div>
   );

@@ -7,6 +7,9 @@
 
 .recommendedVideos > h2 {
   margin-left: 5px;
-  background: red;
   margin-bottom: 20px;
+}
+.recommendedVideos__videos {
+  display: flex;
+  flex-wrap: wrap;
 }
