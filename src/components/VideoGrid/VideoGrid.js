@@ -1,13 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import Spinner from '../Spinner';
 import VideoCard from '../VideoCard/VideoCard';
 import './VideoGrid.css';
 import { Link } from 'react-router-dom';
 
-const VideoGrid = ({ items, isLoading }) => {
-  return isLoading ? (
-    <Spinner />
-  ) : (
+const VideoGrid = ({ items }) => {
+  return (
     <section className='recommendedVideos'>
       <div className='recommendedVideos__videos'>
         {items.map((item) => (

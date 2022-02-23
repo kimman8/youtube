@@ -7,6 +7,7 @@ import Avatar from '@mui/material/Avatar';
 import './VideoCard.css';
 import Time from '../../utils/Time';
 import Views from '../../utils/Views';
+const API_KEY = process.env.REACT_APP_API_KEY;
 
 function VideoCard({ item }) {
   const [stat, setStat] = useState([]);
@@ -29,10 +30,10 @@ function VideoCard({ item }) {
   useEffect(() => {
     const fetchItems = async () => {
       const statistics1 = await axios.get(
-        `https://youtube.googleapis.com/youtube/v3/videos?part=statistics&id=${item.id.videoId}&key=AIzaSyCDzr4Jp-WWWvTXXzpUrr7KuIU1AxpeKaE`
+        `https://youtube.googleapis.com/youtube/v3/videos?part=statistics&id=${item.id.videoId}&key=${API_KEY}`
       );
       const videoDuration = await axios.get(
-        `https://www.googleapis.com/youtube/v3/videos?id=${item.id.videoId}&part=contentDetails&key=AIzaSyCDzr4Jp-WWWvTXXzpUrr7KuIU1AxpeKaE`
+        `https://www.googleapis.com/youtube/v3/videos?id=${item.id.videoId}&part=contentDetails&key=${API_KEY}`
       );
       setStat(statistics1);
       setContentDeets(videoDuration);

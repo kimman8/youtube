@@ -1,5 +1,7 @@
 .videoCard {
   width: 270px;
+  text-decoration: none;
+
   margin-bottom: 40px;
 }
 .videoCard:hover .videoCard__like {
@@ -15,6 +17,8 @@
 .videoCard__info {
   display: flex;
   margin-top: 0;
+  text-decoration: none;
+
   padding-right: 25px;
 }
 
@@ -50,4 +54,8 @@
   width: 20px !important;
   height: 20px !important;
   opacity: 0;
+}
+a:link {
+  text-decoration: none !important;
+  color: black;
 }

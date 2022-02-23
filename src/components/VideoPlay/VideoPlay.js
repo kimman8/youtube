@@ -1,10 +1,7 @@
 import React from 'react';
 import './VideoPlay.css';
-import { useParams, useNavigate } from 'react-router-dom';
 
-function VideoPlay() {
-  const navigate = useNavigate();
-  const params = useParams();
+function VideoPlay({ addLikedVideo, tester }) {
   const ID = window.location.href.slice(-11);
 
   return (
@@ -17,6 +14,7 @@ function VideoPlay() {
         width='100%'
         height='100%'
       ></iframe>
+      <button onClick={() => addLikedVideo(ID)}>Add to Playlist</button>
     </div>
   );
 }

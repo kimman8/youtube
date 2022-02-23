@@ -9,19 +9,49 @@ import Header from './components/Header/Header';
 import Sidebar from './components/Sidebar/Sidebar';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import LikedVideos from './components/LikedVideos/LikedVideos';
+const API_KEY = process.env.REACT_APP_API_KEY;
 
 const App = () => {
   const [items, setItems] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  // const [isLoading, setIsLoading] = useState(true);
   const [query, setQuery] = useState('');
+  const [likedVideos, setLikedVideos] = useState([]);
 
+  useEffect(() => {
+    const getLikedVideos = async () => {
+      const likedVideosFromServer = await fetchLikedVideos();
+      setLikedVideos(likedVideosFromServer);
+    };
+    getLikedVideos();
+  }, []);
+  const fetchLikedVideos = async () => {
+    const res = await fetch('http://localhost:8000/likedVideos');
+    const data = await res.json();
+    return data;
+  };
+
+  const addLikedVideo = async (likedVideo) => {
+    const newLikedVideo = {
+      id: likedVideo,
+    };
+    const res = await fetch('http://localhost:8000/likedVideos', {
+      method: 'POST',
+      headers: {
+        'Content-type': 'application/json',
+      },
+      body: JSON.stringify(newLikedVideo),
+    });
+    const data = await res.json();
+    setLikedVideos([...likedVideos, data]);
+    console.log(data);
+  };
   useEffect(() => {
     const fetchItems = async () => {
       const result = await axios.get(
-        `https://youtube.googleapis.com/youtube/v3/search?part=snippet&q=${query}&key=AIzaSyCDzr4Jp-WWWvTXXzpUrr7KuIU1AxpeKaE&maxResults=2`
+        `https://youtube.googleapis.com/youtube/v3/search?part=snippet&q=${query}&key=${API_KEY}&maxResults=2`
       );
       setItems(result.data.items);
-      setIsLoading(false);
+      // setIsLoading(false);
     };
     fetchItems();
   }, [query]);
@@ -30,14 +60,13 @@ const App = () => {
       <div className='app'>
         <BrowserRouter>
           <Header getQuery={(q) => setQuery(q)} />
-
           <Routes>
             <Route
               path='/'
               element={
                 <div className='app__page'>
                   <Sidebar />
-                  <VideoGrid isLoading={isLoading} items={items} />
+                  <VideoGrid items={items} addLikedVideo={addLikedVideo} />
                 </div>
               }
             />
@@ -46,7 +75,10 @@ const App = () => {
               element={
                 <div className='app__page'>
                   <Sidebar />
-                  <LikedVideos />
+                  <LikedVideos
+                    addLikedVideo={addLikedVideo}
+                    likedVideos={likedVideos}
+                  />
                 </div>
               }
             />
@@ -55,7 +87,7 @@ const App = () => {
               element={
                 <div className='app__page'>
                   <Sidebar />
-                  <VideoPlay />
+                  <VideoPlay addLikedVideo={addLikedVideo} />
                 </div>
               }
             />

@@ -1,0 +1,10 @@
+.videoRow {
+  display: flex;
+  align-items: center;
+  width: 70%;
+}
+
+.videoRow__text {
+  display: flex;
+  flex-direction: column;
+}
