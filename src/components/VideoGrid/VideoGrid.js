@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import VideoCard from '../VideoCard/VideoCard';
 import './VideoGrid.css';
 import { Link } from 'react-router-dom';

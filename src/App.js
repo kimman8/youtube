@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { GlobalContext } from './context/GlobalState';
+import React, { useState, useEffect } from 'react';
+// import { GlobalContext } from './context/GlobalState';
 import { GlobalProvider } from './context/GlobalState';
 import './styles/nprogress.css';
 import NProgress from 'nprogress';
@@ -9,7 +9,7 @@ import VideoPlay from './components/VideoPlay/VideoPlay';
 import axios from 'axios';
 import Header from './components/Header/Header';
 import Sidebar from './components/Sidebar/Sidebar';
-import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import LikedVideos from './components/LikedVideos/LikedVideos';
 const API_KEY = process.env.REACT_APP_API_KEY2;
 

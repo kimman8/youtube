@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import ThumbUpAltOutlinedIcon from '@mui/icons-material/ThumbUpAltOutlined';
-import ThumbDownOffAltIcon from '@mui/icons-material/ThumbDownOffAlt';
-import { Link } from 'react-router-dom';
+// import ThumbUpAltOutlinedIcon from '@mui/icons-material/ThumbUpAltOutlined';
+// import ThumbDownOffAltIcon from '@mui/icons-material/ThumbDownOffAlt';
+// import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Avatar from '@mui/material/Avatar';
 import './VideoCard.css';
@@ -14,18 +14,18 @@ function VideoCard({ item }) {
   const [contentDeets, setContentDeets] = useState([]);
   const [videoIDs, setVideoIDs] = useState(['hi']);
   const [liked, setLiked] = useState(true);
-  const addVideos = () => {
-    if (liked) {
-      videoIDs.push(item.id.videoId);
-    } else {
-      videoIDs.pop(item.id.videoId);
-    }
-    // console.log(videoIDs);
-    // console.log(item.id.videoId);
-    setLiked(!liked);
-    console.log(videoIDs);
-    setVideoIDs(videoIDs);
-  };
+  // const addVideos = () => {
+  //   if (liked) {
+  //     videoIDs.push(item.id.videoId);
+  //   } else {
+  //     videoIDs.pop(item.id.videoId);
+  //   }
+  //   // console.log(videoIDs);
+  //   // console.log(item.id.videoId);
+  //   setLiked(!liked);
+  //   console.log(videoIDs);
+  //   setVideoIDs(videoIDs);
+  // };
 
   useEffect(() => {
     const fetchItems = async () => {

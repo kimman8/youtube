@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import '../../styles/nprogress.css';
-import NProgress from 'nprogress';
+// import NProgress from 'nprogress';
 import { Link } from 'react-router-dom';
 import './LikedVideos.css';
-import VideoCard from '../VideoCard/VideoCard';
+// import VideoCard from '../VideoCard/VideoCard';
 import axios from 'axios';
 import VideoRow from '../VideoRow/VideoRow';
 const API_KEY = process.env.REACT_APP_API_KEY2;
@@ -17,12 +17,12 @@ function LikedVideos({ likedVideos }) {
     }
     return idString;
   };
-  const clearLocalStorage = () => {
-    NProgress.start();
-    localStorage.clear();
-    // window.location.reload();
-    NProgress.done();
-  };
+  // const clearLocalStorage = () => {
+  //   NProgress.start();
+  //   localStorage.clear();
+  //   // window.location.reload();
+  //   NProgress.done();
+  // };
   console.log(turnArrayIntoString());
   console.log(likedVideos[0].id);
   useEffect(() => {
