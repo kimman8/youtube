@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import './VideoRow.css';
 import Time from '../../utils/Time';
-import Views from '../../utils/Views';
-import Avatar from '@mui/material/Avatar';
 import axios from 'axios';
-const API_KEY = process.env.REACT_APP_API_KEY;
+const API_KEY = process.env.REACT_APP_API_KEY2;
 
 function VideoRow({ item }) {
   const [stat, setStat] = useState([]);
@@ -30,18 +28,11 @@ function VideoRow({ item }) {
         src={item.snippet.thumbnails.medium.url}
         alt=''
       />
-      <Avatar
-        className='videoRow__logo'
-        alt={item.snippet.channelTitle}
-        src={item.snippet.thumbnails.default.url}
-      />
-      <div className='videoRow__text'>
-        <h4>{item.snippet.title}</h4>
-        <p>{item.snippet.channelTitle}</p>
 
-        <p>
-          {Views(stat?.data?.items[0]?.statistics?.viewCount)} •{' '}
-          {Time(item.snippet.publishedAt)}
+      <div className='videoRow__text'>
+        <h3>{item.snippet.title}</h3>
+        <p className='videoRow__headline'>
+          {item.snippet.channelTitle} • {Time(item.snippet.publishedAt)}
         </p>
       </div>
     </div>

@@ -1,10 +1,42 @@
 .videoRow {
   display: flex;
+  margin-bottom: 30px;
+  max-width: 1000px;
   align-items: center;
-  width: 70%;
 }
-
+.videoRow:hover {
+  background-color: lightgray;
+}
+.videoRow > img {
+  object-fit: contain;
+  width: 246px;
+  height: 138px;
+}
 .videoRow__text {
   display: flex;
   flex-direction: column;
+  margin-left: 14px;
+}
+.videoRow__text > p {
+  color: #606060;
+  font-size: small !important;
+}
+.videoRow__logo {
+  height: 120px !important;
+  width: 120px !important;
+  margin: 10px 60px;
+}
+.videoRow__text > h3 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.videoRow__description {
+  margin-top: 20px;
+  font-size: 12px;
+  color: #606060;
+}
+.videoRow__headline {
+  font-size: 12px;
+  color: #606060;
 }

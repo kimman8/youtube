@@ -7,7 +7,7 @@ import Avatar from '@mui/material/Avatar';
 import './VideoCard.css';
 import Time from '../../utils/Time';
 import Views from '../../utils/Views';
-const API_KEY = process.env.REACT_APP_API_KEY;
+const API_KEY = process.env.REACT_APP_API_KEY2;
 
 function VideoCard({ item }) {
   const [stat, setStat] = useState([]);
@@ -76,7 +76,7 @@ function VideoCard({ item }) {
             {Time(item.snippet.publishedAt)}
           </p>
         </div>
-        {liked ? (
+        {/* {liked ? (
           <ThumbUpAltOutlinedIcon
             className='videoCard__like'
             onClick={addVideos}
@@ -86,7 +86,7 @@ function VideoCard({ item }) {
             className='videoCard__like'
             onClick={addVideos}
           />
-        )}
+        )} */}
       </div>
     </div>
   );

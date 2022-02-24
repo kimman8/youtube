@@ -20,8 +20,7 @@ export const GlobalProvider = ({ children }) => {
     localStorage.setItem('state', JSON.stringify(state));
   }, [state]);
   //actions
-  console.log(state.likedVideos);
-  function addLikedVideo(likedVideo) {
+  function addingLikedVideo(likedVideo) {
     dispatch({
       type: 'ADD_LIKEDVIDEO',
       payload: likedVideo,
@@ -31,7 +30,7 @@ export const GlobalProvider = ({ children }) => {
     <GlobalContext.Provider
       value={{
         likedVideos: state.likedVideos,
-        addLikedVideo,
+        addingLikedVideo,
         state,
         dispatch,
       }}

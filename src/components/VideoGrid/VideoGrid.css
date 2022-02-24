@@ -5,6 +5,11 @@
   padding-bottom: 0;
   text-decoration: none;
 }
+@media only screen and (max-width: 400px) {
+  .recommendedVideos {
+    padding: 40px 60px;
+  }
+}
 
 .recommendedVideos > h2 {
   margin-left: 5px;

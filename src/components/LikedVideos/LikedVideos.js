@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import '../../styles/nprogress.css';
+import NProgress from 'nprogress';
 import { Link } from 'react-router-dom';
 import './LikedVideos.css';
 import VideoCard from '../VideoCard/VideoCard';
 import axios from 'axios';
 import VideoRow from '../VideoRow/VideoRow';
-const API_KEY = process.env.REACT_APP_API_KEY;
+const API_KEY = process.env.REACT_APP_API_KEY2;
 
 function LikedVideos({ likedVideos }) {
   const [items, setItems] = useState([]);
@@ -14,6 +16,12 @@ function LikedVideos({ likedVideos }) {
       idString = idString.concat(i === 0 ? '' : ',', likedVideos[i].id);
     }
     return idString;
+  };
+  const clearLocalStorage = () => {
+    NProgress.start();
+    localStorage.clear();
+    // window.location.reload();
+    NProgress.done();
   };
   console.log(turnArrayIntoString());
   console.log(likedVideos[0].id);
@@ -29,6 +37,7 @@ function LikedVideos({ likedVideos }) {
   return (
     <div className='likedVideos'>
       <h3>Liked videos</h3>
+      <p>{items.length} videos</p>
       <hr />
       <div className='likedVideos__rows'>
         {items.map((likedVideo) => (

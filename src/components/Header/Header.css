@@ -19,6 +19,7 @@
 .header__left {
   display: flex;
   align-items: center;
+  cursor: pointer;
 }
 .header__input {
   display: flex;
@@ -35,6 +36,17 @@
   display: flex;
   align-items: center;
 }
+@media only screen and (max-width: 800px) {
+  .header__icons {
+    display: none;
+  }
+}
+@media only screen and (max-width: 768px) {
+  .header__input > input {
+    width: 35%;
+    margin-right: 40px;
+  }
+}
 .header__icon {
   margin-right: 38px;
   cursor: pointer;
@@ -42,7 +54,7 @@
 
 .header__inputButton {
   border-left: 1px solid lightgray;
-  width: 5 0px !important;
+  width: 50px !important;
   background-color: #fafafa;
   color: gray;
 }

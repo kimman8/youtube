@@ -8,7 +8,7 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import Avatar from '@mui/material/Avatar';
 import { Link } from 'react-router-dom';
 
-function Header({ getQuery }) {
+function Header({ getQuery, loader, handleToggle }) {
   const [text, setText] = useState('');
   const onChange = (q) => {
     setText(q);
@@ -17,8 +17,8 @@ function Header({ getQuery }) {
   return (
     <div className='header'>
       <div className='header__left'>
-        <MenuIcon />
-        <Link to='/'>
+        <MenuIcon onClick={handleToggle} />
+        <Link to='/' onClick={loader}>
           <img
             className='header__logo'
             src='https://upload.wikimedia.org/wikipedia/commons/b/b8/YouTube_Logo_2017.svg'

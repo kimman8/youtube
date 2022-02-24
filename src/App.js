@@ -1,19 +1,31 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { GlobalContext } from './context/GlobalState';
 import { GlobalProvider } from './context/GlobalState';
-
+import './styles/nprogress.css';
+import NProgress from 'nprogress';
 import './App.css';
 import VideoGrid from './components/VideoGrid/VideoGrid';
 import VideoPlay from './components/VideoPlay/VideoPlay';
 import axios from 'axios';
 import Header from './components/Header/Header';
 import Sidebar from './components/Sidebar/Sidebar';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import LikedVideos from './components/LikedVideos/LikedVideos';
-const API_KEY = process.env.REACT_APP_API_KEY;
+const API_KEY = process.env.REACT_APP_API_KEY2;
 
 const App = () => {
+  // const { addingLikedVideo } = useContext(GlobalContext);
+
+  const loader = () => {
+    NProgress.start();
+    NProgress.done();
+  };
+  const [toggle, setToggle] = useState(true);
+  const handleToggle = () => {
+    setToggle(!toggle);
+    console.log('togglge');
+  };
   const [items, setItems] = useState([]);
-  // const [isLoading, setIsLoading] = useState(true);
   const [query, setQuery] = useState('');
   const [likedVideos, setLikedVideos] = useState([]);
 
@@ -31,9 +43,12 @@ const App = () => {
   };
 
   const addLikedVideo = async (likedVideo) => {
+    NProgress.start();
+
     const newLikedVideo = {
       id: likedVideo,
     };
+
     const res = await fetch('http://localhost:8000/likedVideos', {
       method: 'POST',
       headers: {
@@ -44,14 +59,23 @@ const App = () => {
     const data = await res.json();
     setLikedVideos([...likedVideos, data]);
     console.log(data);
+    NProgress.done();
+  };
+  const deleteLikedVideo = async (ID, likedVideo) => {
+    NProgress.start();
+
+    await fetch(`http://localhost:8000/likedVideos/${likedVideo}`, {
+      method: 'DELETE',
+    });
+    setLikedVideos(likedVideos.filter((likedVideo) => likedVideo.id !== ID));
+    NProgress.done();
   };
   useEffect(() => {
     const fetchItems = async () => {
       const result = await axios.get(
-        `https://youtube.googleapis.com/youtube/v3/search?part=snippet&q=${query}&key=${API_KEY}&maxResults=2`
+        `https://youtube.googleapis.com/youtube/v3/search?part=snippet&q=${query}&key=${API_KEY}&maxResults=25`
       );
       setItems(result.data.items);
-      // setIsLoading(false);
     };
     fetchItems();
   }, [query]);
@@ -59,13 +83,19 @@ const App = () => {
     <GlobalProvider>
       <div className='app'>
         <BrowserRouter>
-          <Header getQuery={(q) => setQuery(q)} />
+          <Header
+            getQuery={(q) => setQuery(q)}
+            loader={loader}
+            handleToggle={handleToggle}
+          />
           <Routes>
             <Route
               path='/'
               element={
                 <div className='app__page'>
-                  <Sidebar />
+                  {toggle && (
+                    <Sidebar loader={loader} handleToggle={handleToggle} />
+                  )}
                   <VideoGrid items={items} addLikedVideo={addLikedVideo} />
                 </div>
               }
@@ -74,7 +104,9 @@ const App = () => {
               path='/likedvideos'
               element={
                 <div className='app__page'>
-                  <Sidebar />
+                  {toggle && (
+                    <Sidebar loader={loader} handleToggle={handleToggle} />
+                  )}
                   <LikedVideos
                     addLikedVideo={addLikedVideo}
                     likedVideos={likedVideos}
@@ -86,8 +118,13 @@ const App = () => {
               path='/VideoPlay/:id'
               element={
                 <div className='app__page'>
-                  <Sidebar />
-                  <VideoPlay addLikedVideo={addLikedVideo} />
+                  {toggle && (
+                    <Sidebar loader={loader} handleToggle={handleToggle} />
+                  )}
+                  <VideoPlay
+                    addLikedVideo={addLikedVideo}
+                    deleteLikedVideo={deleteLikedVideo}
+                  />
                 </div>
               }
             />

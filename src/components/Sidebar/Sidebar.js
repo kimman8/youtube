@@ -12,10 +12,10 @@ import { Link } from 'react-router-dom';
 import SidebarRow from '../SidebarRow/SidebarRow';
 import './Sidebar.css';
 
-function Sidebar() {
+function Sidebar({ loader, handleToggle }) {
   return (
     <div className='sidebar'>
-      <Link to='/'>
+      <Link to='/' onClick={loader}>
         <SidebarRow selected Icon={HomeIcon} title='Home' />
       </Link>
       <SidebarRow Icon={WhatshotIcon} title='Trending' />
@@ -25,7 +25,7 @@ function Sidebar() {
       <SidebarRow Icon={HistoryIcon} title='History' />
       <SidebarRow Icon={WatchLaterIcon} title='Watch Later' />
       <SidebarRow Icon={DownloadIcon} title='Downloads' />
-      <Link to='/likedvideos'>
+      <Link to='/likedvideos' onClick={loader}>
         <SidebarRow Icon={ThumbUpAltOutlinedIcon} title='Liked videos' />
       </Link>
       <hr />
