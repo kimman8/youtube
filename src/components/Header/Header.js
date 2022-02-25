@@ -17,7 +17,7 @@ function Header({ getQuery, loader, handleToggle }) {
   return (
     <div className='header'>
       <div className='header__left'>
-        <MenuIcon onClick={handleToggle} />
+        <MenuIcon onClick={handleToggle} className='header__left__icon' />
         <Link to='/' onClick={loader}>
           <img
             className='header__logo'

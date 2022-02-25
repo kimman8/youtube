@@ -19,8 +19,15 @@
 .header__left {
   display: flex;
   align-items: center;
+}
+.header__left__icon {
   cursor: pointer;
 }
+/* @media only screen and (max-width: 600px) {
+  .header__left__icon {
+    opacity: 1;
+  }
+} */
 .header__input {
   display: flex;
   align-items: center;

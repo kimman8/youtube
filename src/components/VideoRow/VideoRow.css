@@ -4,6 +4,12 @@
   max-width: 1000px;
   align-items: center;
 }
+@media only screen and (max-width: 650px) {
+  .videoRow {
+    width: 270px;
+    flex-direction: column;
+  }
+}
 .videoRow:hover {
   background-color: lightgray;
 }
@@ -16,10 +22,13 @@
   display: flex;
   flex-direction: column;
   margin-left: 14px;
+  text-decoration: none !important;
+  color: black;
 }
+
 .videoRow__text > p {
   color: #606060;
-  font-size: small !important;
+  font-size: 12px !important;
 }
 .videoRow__logo {
   height: 120px !important;
@@ -30,6 +39,12 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  font-size: 20px !important;
+}
+@media only screen and (max-width: 600px) {
+  .videoRow__text > h3 {
+    font-size: 14px !important;
+  }
 }
 .videoRow__description {
   margin-top: 20px;

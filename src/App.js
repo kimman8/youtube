@@ -9,9 +9,10 @@ import VideoPlay from './components/VideoPlay/VideoPlay';
 import axios from 'axios';
 import Header from './components/Header/Header';
 import Sidebar from './components/Sidebar/Sidebar';
+import Sidenav from './components/Sidenav';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import LikedVideos from './components/LikedVideos/LikedVideos';
-const API_KEY = process.env.REACT_APP_API_KEY2;
+const API_KEY = process.env.REACT_APP_API_KEY1;
 
 const App = () => {
   // const { addingLikedVideo } = useContext(GlobalContext);
@@ -20,15 +21,20 @@ const App = () => {
     NProgress.start();
     NProgress.done();
   };
+
   const [toggle, setToggle] = useState(true);
   const handleToggle = () => {
     setToggle(!toggle);
-    console.log('togglge');
   };
   const [items, setItems] = useState([]);
   const [query, setQuery] = useState('');
   const [likedVideos, setLikedVideos] = useState([]);
-
+  useEffect(() => {
+    if (window.screen.width < 600) {
+      setToggle(!toggle);
+      console.log('hi');
+    }
+  }, [window.screen.width]);
   useEffect(() => {
     const getLikedVideos = async () => {
       const likedVideosFromServer = await fetchLikedVideos();
@@ -64,9 +70,10 @@ const App = () => {
   const deleteLikedVideo = async (ID, likedVideo) => {
     NProgress.start();
 
-    await fetch(`http://localhost:8000/likedVideos/${likedVideo}`, {
+    await fetch(`http://localhost:8000/likedVideos/${ID}`, {
       method: 'DELETE',
     });
+
     setLikedVideos(likedVideos.filter((likedVideo) => likedVideo.id !== ID));
     NProgress.done();
   };
@@ -83,6 +90,7 @@ const App = () => {
     <GlobalProvider>
       <div className='app'>
         <BrowserRouter>
+          <Sidenav handleToggle={handleToggle} toggle={toggle} />
           <Header
             getQuery={(q) => setQuery(q)}
             loader={loader}

@@ -7,7 +7,7 @@ import Avatar from '@mui/material/Avatar';
 import './VideoCard.css';
 import Time from '../../utils/Time';
 import Views from '../../utils/Views';
-const API_KEY = process.env.REACT_APP_API_KEY2;
+const API_KEY = process.env.REACT_APP_API_KEY1;
 
 function VideoCard({ item }) {
   const [stat, setStat] = useState([]);
