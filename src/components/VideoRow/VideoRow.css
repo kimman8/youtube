@@ -13,6 +13,7 @@
 .videoRow:hover {
   background-color: lightgray;
 }
+
 .videoRow > img {
   object-fit: contain;
   width: 246px;

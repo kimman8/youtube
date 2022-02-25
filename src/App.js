@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
+import debounce from 'lodash.debounce';
 // import { GlobalContext } from './context/GlobalState';
 import { GlobalProvider } from './context/GlobalState';
 import './styles/nprogress.css';
@@ -12,7 +13,7 @@ import Sidebar from './components/Sidebar/Sidebar';
 import Sidenav from './components/Sidenav';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import LikedVideos from './components/LikedVideos/LikedVideos';
-const API_KEY = process.env.REACT_APP_API_KEY1;
+const API_KEY = process.env.REACT_APP_API_KEY2;
 
 const App = () => {
   // const { addingLikedVideo } = useContext(GlobalContext);
@@ -21,7 +22,6 @@ const App = () => {
     NProgress.start();
     NProgress.done();
   };
-
   const [toggle, setToggle] = useState(true);
   const handleToggle = () => {
     setToggle(!toggle);
@@ -29,12 +29,7 @@ const App = () => {
   const [items, setItems] = useState([]);
   const [query, setQuery] = useState('');
   const [likedVideos, setLikedVideos] = useState([]);
-  useEffect(() => {
-    if (window.screen.width < 600) {
-      setToggle(!toggle);
-      console.log('hi');
-    }
-  }, [window.screen.width]);
+
   useEffect(() => {
     const getLikedVideos = async () => {
       const likedVideosFromServer = await fetchLikedVideos();
@@ -84,15 +79,19 @@ const App = () => {
       );
       setItems(result.data.items);
     };
+    // debounce(fetchItems(), 300);
     fetchItems();
   }, [query]);
+  const findQuery = (q) => setQuery(q);
+  // const findItemsButChill = debounce(fetchItems, 350);
+  const debouncedChangeHandler = useCallback(debounce(findQuery, 300), []);
   return (
     <GlobalProvider>
       <div className='app'>
         <BrowserRouter>
           <Sidenav handleToggle={handleToggle} toggle={toggle} />
           <Header
-            getQuery={(q) => setQuery(q)}
+            getQuery={debouncedChangeHandler}
             loader={loader}
             handleToggle={handleToggle}
           />
@@ -102,7 +101,11 @@ const App = () => {
               element={
                 <div className='app__page'>
                   {toggle && (
-                    <Sidebar loader={loader} handleToggle={handleToggle} />
+                    <Sidebar
+                      loader={loader}
+                      handleToggle={handleToggle}
+                      likedVideos={likedVideos}
+                    />
                   )}
                   <VideoGrid items={items} addLikedVideo={addLikedVideo} />
                 </div>
@@ -113,7 +116,11 @@ const App = () => {
               element={
                 <div className='app__page'>
                   {toggle && (
-                    <Sidebar loader={loader} handleToggle={handleToggle} />
+                    <Sidebar
+                      loader={loader}
+                      handleToggle={handleToggle}
+                      likedVideos={likedVideos}
+                    />
                   )}
                   <LikedVideos
                     addLikedVideo={addLikedVideo}
@@ -127,7 +134,11 @@ const App = () => {
               element={
                 <div className='app__page'>
                   {toggle && (
-                    <Sidebar loader={loader} handleToggle={handleToggle} />
+                    <Sidebar
+                      loader={loader}
+                      handleToggle={handleToggle}
+                      likedVideos={likedVideos}
+                    />
                   )}
                   <VideoPlay
                     addLikedVideo={addLikedVideo}

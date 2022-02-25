@@ -11,8 +11,9 @@ import { Link } from 'react-router-dom';
 
 import SidebarRow from '../SidebarRow/SidebarRow';
 import './Sidebar.css';
+import LikedVideosCount from '../LikedVideosCount/LikedVideosCount';
 
-function Sidebar({ loader, handleToggle }) {
+function Sidebar({ loader, handleToggle, likedVideos }) {
   return (
     <div className='sidebar'>
       <Link to='/' onClick={loader}>
@@ -26,7 +27,11 @@ function Sidebar({ loader, handleToggle }) {
       <SidebarRow Icon={WatchLaterIcon} title='Watch Later' />
       <SidebarRow Icon={DownloadIcon} title='Downloads' />
       <Link to='/likedvideos' onClick={loader}>
-        <SidebarRow Icon={ThumbUpAltOutlinedIcon} title='Liked videos' />
+        <SidebarRow
+          Icon={ThumbUpAltOutlinedIcon}
+          title='Liked videos'
+          likedVideos={likedVideos}
+        />
       </Link>
       <hr />
     </div>

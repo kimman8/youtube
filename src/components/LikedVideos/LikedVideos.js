@@ -7,7 +7,7 @@ import './LikedVideos.css';
 import axios from 'axios';
 import VideoRow from '../VideoRow/VideoRow';
 import VideoCard from '../VideoCard/VideoCard';
-const API_KEY = process.env.REACT_APP_API_KEY1;
+const API_KEY = process.env.REACT_APP_API_KEY2;
 
 function LikedVideos({ likedVideos }) {
   const [items, setItems] = useState([]);
