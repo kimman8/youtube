@@ -19,8 +19,8 @@ function VideoPlay({ addLikedVideo, deleteLikedVideo }) {
         width='100%'
         height='100%'
       ></iframe>
-      <button onClick={() => addLikedVideo(ID)}>ADD TO PLAYLIST</button>
-      <button onClick={() => deleteLikedVideo(ID)}>REMOVE FROM PLAYLIST</button>
+      {/* <button onClick={() => addLikedVideo(ID)}>ADD TO PLAYLIST</button> */}
+      {/* <button onClick={() => deleteLikedVideo(ID)}>REMOVE FROM PLAYLIST</button> */}
     </div>
   );
 }
